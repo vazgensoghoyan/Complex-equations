@@ -128,37 +128,6 @@ namespace MathProject
             return new Complex(number, 0);
         }
 
-        // ////////////////////////////////////////
-        public static implicit operator Complex(string n)
-        {
-            string re = string.Empty;
-            string im = string.Empty;
-
-            if (!char.IsNumber(n[0]))
-            {
-                re += n[0];
-                n = n.Remove(0, 1);
-            }
-
-            n = n.Replace(" ", "");
-            if (n[n.Length - 1] != 'i')
-                throw new Exception();
-            n = n.Remove(n.Length - 1);
-            if (!char.IsNumber(n[n.Length - 1]))
-                n += "1";
-
-            var s = n.Split(new string[] { "+", "-", "i" }, StringSplitOptions.None);
-            foreach (var i in s)
-                if (!double.TryParse(i, out _))
-                    throw new Exception();
-
-            re += s[0];
-            im += (n.Contains('-') ? "-" : "") + s[1];
-
-            return new Complex(double.Parse(re), double.Parse(im));
-        }
-        // ////////////////////////////////////////
-
         /// <summary>
         /// корень n-ной степени из комплексного числа. Возвращает массивом
         /// n комплексных чисел, которые соответствуют решениям требуемой задачи.
